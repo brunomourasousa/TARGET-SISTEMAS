@@ -1,0 +1,186 @@
+QUESTÃO 1 =  
+
+public class SomaIndice {
+    public static void main(String[] args) {
+        int INDICE = 13, SOMA = 0, K = 0;
+        
+        // Loop enquanto K for menor que o INDICE
+        while (K < INDICE) {
+            K = K + 1;
+            SOMA = SOMA + K;
+        }
+        
+        // Imprime o valor de SOMA
+        System.out.println("O valor final da variável SOMA é: " + SOMA);
+    }
+}
+
+VALOR DA SOMA SERÁ 91
+
+QUESTÃO 2 = 
+
+
+import java.util.Scanner;
+
+public class FibonacciChecker {
+    
+    // Método para verificar se um número pertence à sequência de Fibonacci
+    public static boolean isFibonacci(int number) {
+        int a = 0, b = 1, next;
+        
+        if (number == a || number == b) {
+            return true;
+        }
+        
+        next = a + b;
+        
+        // Gera a sequência até que o próximo número seja maior ou igual ao número informado
+        while (next <= number) {
+            if (next == number) {
+                return true; // O número pertence à sequência
+            }
+            a = b;
+            b = next;
+            next = a + b;
+        }
+        
+        return false; // O número não pertence à sequência
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Informe um número: ");
+        int number = scanner.nextInt();
+        
+        // Verifica se o número informado pertence à sequência de Fibonacci
+        if (isFibonacci(number)) {
+            System.out.println("O número " + number + " pertence à sequência de Fibonacci.");
+        } else {
+            System.out.println("O número " + number + " não pertence à sequência de Fibonacci.");
+        }
+        
+        scanner.close();
+    }
+}
+
+
+QUESTÃO 3 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class FaturamentoDistribuidora {
+
+    public static void main(String[] args) {
+        // Exemplo de dados de faturamento diário em JSON
+        String jsonString = "[{\"dia\": 1, \"valor\": 200.0}, {\"dia\": 2, \"valor\": 0.0}, " +
+                            "{\"dia\": 3, \"valor\": 150.0}, {\"dia\": 4, \"valor\": 0.0}, " +
+                            "{\"dia\": 5, \"valor\": 300.0}, {\"dia\": 6, \"valor\": 50.0}, " +
+                            "{\"dia\": 7, \"valor\": 0.0}]";
+
+        // Convertendo o JSON String para JSONArray
+        JSONArray faturamentoArray = new JSONArray(jsonString);
+
+        double menorValor = Double.MAX_VALUE;
+        double maiorValor = Double.MIN_VALUE;
+        double soma = 0.0;
+        int diasComFaturamento = 0;
+
+        // Iterar sobre os dados para encontrar o menor e maior valor, e calcular a soma
+        for (int i = 0; i < faturamentoArray.length(); i++) {
+            JSONObject diaFaturamento = faturamentoArray.getJSONObject(i);
+            double valor = diaFaturamento.getDouble("valor");
+
+            // Ignorar dias sem faturamento (valor 0.0)
+            if (valor > 0.0) {
+                if (valor < menorValor) {
+                    menorValor = valor;
+                }
+                if (valor > maiorValor) {
+                    maiorValor = valor;
+                }
+                soma += valor;
+                diasComFaturamento++;
+            }
+        }
+
+        // Calcular a média do faturamento
+        double mediaMensal = soma / diasComFaturamento;
+
+        // Contar o número de dias com faturamento superior à média mensal
+        int diasAcimaDaMedia = 0;
+        for (int i = 0; i < faturamentoArray.length(); i++) {
+            JSONObject diaFaturamento = faturamentoArray.getJSONObject(i);
+            double valor = diaFaturamento.getDouble("valor");
+
+            if (valor > mediaMensal) {
+                diasAcimaDaMedia++;
+            }
+        }
+
+        // Exibir os resultados
+        System.out.println("Menor valor de faturamento: " + menorValor);
+        System.out.println("Maior valor de faturamento: " + maiorValor);
+        System.out.println("Número de dias com faturamento superior à média mensal: " + diasAcimaDaMedia);
+    }
+}
+
+QUESTÃO 4
+
+public class FaturamentoDistribuidoraPorEstado {
+
+    public static void main(String[] args) {
+        // Faturamento mensal por estado
+        double sp = 67836.43;
+        double rj = 36678.66;
+        double mg = 29229.88;
+        double es = 27165.48;
+        double outros = 19849.53;
+
+        // Cálculo do faturamento total
+        double total = sp + rj + mg + es + outros;
+
+        // Cálculo do percentual de cada estado
+        double percentualSP = (sp / total) * 100;
+        double percentualRJ = (rj / total) * 100;
+        double percentualMG = (mg / total) * 100;
+        double percentualES = (es / total) * 100;
+        double percentualOutros = (outros / total) * 100;
+
+        // Exibindo os resultados
+        System.out.printf("Percentual de SP: %.2f%%\n", percentualSP);
+        System.out.printf("Percentual de RJ: %.2f%%\n", percentualRJ);
+        System.out.printf("Percentual de MG: %.2f%%\n", percentualMG);
+        System.out.printf("Percentual de ES: %.2f%%\n", percentualES);
+        System.out.printf("Percentual de Outros: %.2f%%\n", percentualOutros);
+    }
+}
+
+QUESTÃO 5
+
+import java.util.Scanner;
+
+public class InversorDeString {
+
+    public static void main(String[] args) {
+        // Entrada da string através do usuário
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Digite uma string para inverter: ");
+        String original = scanner.nextLine();
+        
+        // Inicializa uma string vazia para armazenar o resultado invertido
+        String invertida = "";
+
+        // Percorre a string original de trás para frente
+        for (int i = original.length() - 1; i >= 0; i--) {
+            invertida += original.charAt(i); // Concatena o caractere à string invertida
+        }
+
+        // Exibe a string invertida
+        System.out.println("String invertida: " + invertida);
+
+        scanner.close();
+    }
+}
